@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Synergy & Well-being</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #e3fdfd; /* Light aqua background */
+            color: #1b4d3e; /* Deep green for text */
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: #156064;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #28527a;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #28c76f, #1b4d3e);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #156064;
+            padding: 1rem 0;
+        }
+        nav button {
+            background: #28c76f; /* Green button background */
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        nav button:hover {
+            background: #1b4d3e; /* Deep green on hover */
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #f4f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #28527a;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fitness Synergy & Sustainable Well-being</h1>
+    </header>
+    <nav>
+        <button onclick="window.location.href='Fitness_Tips.html'">Fitness Tips</button>
+        <button onclick="window.location.href='Exercise_Routines.html'">Exercise Routines</button>
+        <button onclick="window.location.href='Diets.html'">Diets</button>
+        <button onclick="window.location.href='Hydration_Hero.html'">Mini Game</button>
+        <button onclick="window.location.href='Quiz.html'">Quiz</button>
+        <button onclick="window.location.href='Contact.html'">Contact</button>
+    </nav>
+</head>
+<body>
+
+    <h1>Fitness Knowledge Quiz</h1>
+
+    <div class="quiz-container">
+        <div id="quiz">
+            <div class="question" id="question">What is the best time to exercise?</div>
+            <div class="answers">
+                <button class="answer-option" onclick="checkAnswer(0)">Morning</button>
+                <button class="answer-option" onclick="checkAnswer(1)">Afternoon</button>
+                <button class="answer-option" onclick="checkAnswer(2)">Evening</button>
+                <button class="answer-option" onclick="checkAnswer(3)">Any time is fine</button>
+            </div>
+            <button class="btn-submit" onclick="showResult()">Submit</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questions = [
+            {
+                question: "What is the best time to exercise?",
+                options: ["Morning", "Afternoon", "Evening", "Any time is fine"],
+                correct: 0
+            },
+            {
+                question: "How many hours of sleep should an adult get each night?",
+                options: ["6-7 hours", "7-8 hours", "8-9 hours", "9-10 hours"],
+                correct: 1
+            },
+            {
+                question: "Which exercise is best for burning fat?",
+                options: ["Running", "Yoga", "Weightlifting", "Stretching"],
+                correct: 0
+            }
+        ];
+
+        function checkAnswer(selectedAnswer) {
+            if (selectedAnswer === questions[currentQuestionIndex].correct) {
+                score++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion(currentQuestionIndex);
+            } else {
+                showResult();
+            }
+        }
+
+        function loadQuestion(index) {
+            document.getElementById('question').innerText = questions[index].question;
+            const options = document.querySelectorAll('.answer-option');
+            questions[index].options.forEach((option, i) => {
+                options[i].innerText = option;
+            });
+        }
+
+        function showResult() {
+            const resultText = `Your score is ${score} out of ${questions.length}`;
+            document.getElementById('result').innerText = resultText;
+            document.getElementById('quiz').style.display = 'none';
+        }
+
+        loadQuestion(currentQuestionIndex); // Load the first question
+    </script>
+
+</body>
+</html>

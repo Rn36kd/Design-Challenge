@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Synergy & Well-being</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #e3fdfd; /* Light aqua background */
+            color: #1b4d3e; /* Deep green for text */
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: #156064;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #28527a;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #28c76f, #1b4d3e);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #156064;
+            padding: 1rem 0;
+        }
+        nav button {
+            background: #28c76f; /* Green button background */
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        nav button:hover {
+            background: #1b4d3e; /* Deep green on hover */
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #f4f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #28527a;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            font-size: 1rem;
+        }
+
+        .flashcard img {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fitness Synergy & Sustainable Well-being</h1>
+    </header>
+    <nav>
+        <button onclick="window.location.href='Fitness_Tips.html'">Fitness Tips</button>
+        <button onclick="window.location.href='Exercise-Routines.html'">Exercise Routines</button>
+        <button onclick="window.location.href='Diets.html'">Diets</button>
+        <button onclick="window.location.href='Hydration_Hero.html'">Mini Game</button>
+        <button onclick="window.location.href='Quiz.html'">Quiz</button>
+        <button onclick="window.location.href='Contact.html'">Contact</button>
+    </nav>
+    <div class="container">
+        <section id="interactive">
+            <h2 class="section-title">Fitness Tips</h2>
+            <div class="flashcard">
+                <h3>Random Fitness Tip</h3>
+                <p id="tip-display">Click the button below to see a fitness tip!</p>
+                <button onclick="showRandomTip()">Show Tip</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Fitness Synergy. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Array of tips with descriptions and images
+        const tips = [
+            {
+                tip: "Set clear goals.",
+                description: "Setting clear goals is essential for achieving success as it provides direction, focus, and motivation. Clear goals help you prioritize tasks, track progress, and stay organized, ensuring that your efforts are purposeful and efficient.",
+                
+            },
+            {
+                tip: "Stay consistent.",
+                description: "Consistency is the foundation of any successful fitness journey. Regular workouts help build habits and ensure steady progress over time. Even when motivation dips, sticking to your schedule reinforces discipline.",
+                
+            },
+            {
+                tip: "Warm up and cool down.",
+                description: "A proper warm-up prepares your body for exercise by increasing blood flow, loosening muscles, and improving joint mobility. Similarly, a cool-down helps your body transition back to rest, reducing muscle soreness.",
+                
+            },
+            {
+                tip: "Focus on form.",
+                description: "Correct form is critical for safety and efficiency during workouts. It ensures that the right muscles are being targeted, minimizes the risk of injury, and helps you achieve maximum benefits.",
+               
+            },
+            {
+                tip: "Mix it up.",
+                description: "Variety in your workout routine prevents monotony and keeps you motivated. It also challenges your body in new ways, promoting balanced muscle development and avoiding plateaus.",
+                
+            }
+            // Add more tips as needed
+        ];
+
+        function showRandomTip() {
+            const randomIndex = Math.floor(Math.random() * tips.length);
+            const randomTip = tips[randomIndex];
+
+            // Update the tip display with the new random tip
+            document.getElementById('tip-display').innerHTML = `
+                <strong>${randomTip.tip}</strong>
+                <p>${randomTip.description}</p>
+                
+            `;
+        }
+    </script>
+</body>
+</html>

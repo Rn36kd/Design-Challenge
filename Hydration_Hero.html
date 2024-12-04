@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hydration Hero</title>
+  <style>
+    body {
+      font-family:'Courier New', Cursive;
+      margin: 0;
+      overflow: hidden;
+      background: #e0f7fa;
+    }
+    canvas {
+      display: block;
+      margin: auto;
+      background: #c8e6c9;
+    }
+    #info {
+      text-align: center;
+      padding: 10px;
+      background: #00796b;
+      color: white;
+    }
+    #hydration-tips {
+      text-align: center;
+      padding: 10px;
+      font-size: 16px;
+      color: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <div id="info">
+    <h1>Hydration Hero</h1>
+    <p>Collect water bottles and avoid sugary drinks!</p>
+  </div>
+  <canvas id="gameCanvas" width="600" height="400"></canvas>
+  <div id="hydration-tips"></div>
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Game settings
+    const player = { x: 50, y: 200, width: 20, height: 20, color: "blue" };
+    const waterBottle = { x: 600, y: randomY(), width: 20, height: 20, color: "lightblue" };
+    const sugaryDrink = { x: 600, y: randomY(), width: 20, height: 20, color: "red" };
+    const tips = [
+      "Drink water before, during, and after workouts.",
+      "Avoid sugary drinks—they can dehydrate you.",
+      "Carry a reusable water bottle to stay hydrated.",
+      "Listen to your body; drink when you feel thirsty.",
+      "Cold water can help cool your body during workouts."
+    ];
+    let score = 0;
+    let hydrationTip = "";
+
+    function randomY() {
+      return Math.random() * (canvas.height - 20);
+    }
+
+    function drawPlayer() {
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawObject(obj) {
+      ctx.fillStyle = obj.color;
+      ctx.fillRect(obj.x, obj.y, obj.width, obj.height);
+    }
+
+    function moveObjects() {
+      waterBottle.x -= 4;
+      sugaryDrink.x -= 6;
+
+      if (waterBottle.x + waterBottle.width < 0) {
+        waterBottle.x = canvas.width;
+        waterBottle.y = randomY();
+      }
+      if (sugaryDrink.x + sugaryDrink.width < 0) {
+        sugaryDrink.x = canvas.width;
+        sugaryDrink.y = randomY();
+      }
+    }
+
+    function checkCollision(a, b) {
+      return (
+        a.x < b.x + b.width &&
+        a.x + a.width > b.x &&
+        a.y < b.y + b.height &&
+        a.y + a.height > b.y
+      );
+    }
+
+    function updateGame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      moveObjects();
+
+      if (checkCollision(player, waterBottle)) {
+        score++;
+        waterBottle.x = canvas.width;
+        waterBottle.y = randomY();
+        hydrationTip = tips[Math.floor(Math.random() * tips.length)];
+      }
+
+      if (checkCollision(player, sugaryDrink)) {
+        alert("You hit a sugary drink! Game Over.");
+        document.location.reload();
+      }
+
+      drawPlayer();
+      drawObject(waterBottle);
+      drawObject(sugaryDrink);
+
+      ctx.fillStyle = "black";
+      ctx.font = "16px Arial";
+      ctx.fillText("Score: " + score, 10, 20);
+
+      document.getElementById("hydration-tips").textContent = hydrationTip;
+
+      requestAnimationFrame(updateGame);
+    }
+
+    // Move player
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp" && player.y > 0) player.y -= 20;
+      if (e.key === "ArrowDown" && player.y + player.height < canvas.height) player.y += 20;
+    });
+
+    updateGame();
+  </script>
+</body>
+</html>
